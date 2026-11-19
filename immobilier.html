@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haino et Cie Immobilier — Vendre, louer, investir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#23271f;
+    --paper:#f5f1e8;
+    --paper-dim:#ece5d5;
+    --card:#efe9db;
+    --forest:#34492f;
+    --forest-dim:#4a6244;
+    --brick:#a24a34;
+    --gray:#6e6a5c;
+    --line:#ddd4bf;
+    --max-w:1120px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16.5px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--brick); color:var(--paper);}
+
+  .wrap{max-width:var(--max-w); margin:0 auto; padding:0 32px;}
+
+  /* ---------- Nav ---------- */
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(245,241,232,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:20px; padding-bottom:20px;
+  }
+
+  .wordmark{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:21px;
+    letter-spacing:-0.01em;
+  }
+
+  .wordmark span{ color:var(--forest); }
+
+  .nav-links{
+    display:flex; gap:32px;
+    font-size:14.5px;
+    font-weight:500;
+  }
+
+  .nav-links a{
+    border-bottom:1px solid transparent;
+    padding-bottom:3px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+
+  .nav-links a:hover{ border-color:var(--brick); color:var(--brick); }
+
+  .nav-cta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    background:var(--forest);
+    color:var(--paper);
+    padding:9px 16px;
+    border-radius:2px;
+    transition:background .15s ease;
+  }
+  .nav-cta:hover{ background:var(--forest-dim); }
+
+  @media (max-width:760px){
+    .nav-links{ display:none; }
+  }
+
+  /* ---------- Hero ---------- */
+
+  header.hero{
+    position:relative;
+    padding:100px 0 0;
+    overflow:hidden;
+  }
+
+  .hero-grid-bg{
+    position:absolute;
+    inset:0;
+    opacity:0.5;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:linear-gradient(to bottom, black, transparent 85%);
+    pointer-events:none;
+  }
+
+  .hero-inner{
+    position:relative;
+    max-width:680px;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    color:var(--forest);
+    text-transform:uppercase;
+    margin-bottom:20px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(38px, 6vw, 56px);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+
+  h1 em{
+    font-style:italic;
+    color:var(--forest);
+    font-weight:400;
+  }
+
+  .hero-sub{
+    max-width:52ch;
+    color:#3d3b32;
+    font-size:17.5px;
+    margin-bottom:40px;
+  }
+
+  /* ---------- Search bar ---------- */
+
+  .search-bar{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:22px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr auto;
+    gap:16px;
+    margin-bottom:-64px;
+    transform:translateY(50%);
+    box-shadow:0 12px 32px -12px rgba(35,39,31,0.18);
+  }
+
+  .field{ display:flex; flex-direction:column; gap:6px; }
+
+  .field label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--gray);
+  }
+
+  .field select, .field input{
+    font-family:'Inter', sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:10px 10px;
+  }
+
+  .field select:focus-visible, .field input:focus-visible{
+    outline:2px solid var(--forest);
+    outline-offset:1px;
+  }
+
+  .search-btn{
+    align-self:end;
+    background:var(--brick);
+    color:var(--paper);
+    border:none;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:11px 22px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .search-btn:hover{ background:#8a3c29; }
+
+  @media (max-width:760px){
+    .search-bar{ grid-template-columns:1fr 1fr; }
+    .search-btn{ grid-column:1 / -1; }
+  }
+
+  /* ---------- Section shell ---------- */
+
+  .section{ padding:150px 0 80px; border-bottom:1px solid var(--line); }
+  .section + .section{ padding-top:80px; }
+
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:44px; gap:20px; flex-wrap:wrap;
+  }
+
+  .section-head h2{
+    font-family:'Fraunces', serif; font-weight:500; font-size:30px;
+  }
+
+  .section-head .tag{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--gray);
+  }
+
+  /* ---------- Listings ---------- */
+
+  .listings{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+
+  @media (max-width:900px){ .listings{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .listings{ grid-template-columns:1fr; } }
+
+  .listing{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+
+  .listing:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 28px -16px rgba(35,39,31,0.28);
+  }
+
+  .listing-visual{
+    height:150px;
+    position:relative;
+  }
+
+  .listing-visual::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(35,39,31,0.14) 0 2px, transparent 2px 34px),
+      repeating-linear-gradient(0deg, rgba(35,39,31,0.14) 0 2px, transparent 2px 22px);
+  }
+
+  .lv-1{ background:#b6a893; }
+  .lv-2{ background:#9fae95; }
+  .lv-3{ background:#c2b09c; }
+  .lv-4{ background:#a8ab8d; }
+  .lv-5{ background:#b8a68f; }
+  .lv-6{ background:#9caa8e; }
+
+  .badge{
+    position:absolute; top:12px; left:12px; z-index:2;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px; letter-spacing:0.03em; text-transform:uppercase;
+    background:var(--ink); color:var(--paper);
+    padding:4px 9px; border-radius:2px;
+  }
+
+  .badge.location{ background:var(--forest); }
+  .badge.commercial{ background:var(--brick); }
+
+  .listing-body{ padding:18px 18px 20px; }
+
+  .listing-ref{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; color:var(--gray); margin-bottom:8px;
+  }
+
+  .listing-title{
+    font-family:'Fraunces', serif; font-weight:500; font-size:19px;
+    margin-bottom:4px;
+  }
+
+  .listing-loc{ font-size:14px; color:var(--gray); margin-bottom:14px; }
+
+  .listing-specs{
+    display:flex; gap:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; color:var(--ink);
+    border-top:1px dotted var(--line);
+    padding-top:12px;
+    margin-bottom:14px;
+  }
+
+  .listing-price{
+    font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--forest);
+  }
+
+  /* ---------- Team ---------- */
+
+  .team{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:24px;
+  }
+  @media (max-width:900px){ .team{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .team{ grid-template-columns:1fr; } }
+
+  .member{ text-align:left; }
+
+  .avatar{
+    width:100%; aspect-ratio:1;
+    border-radius:4px;
+    margin-bottom:14px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .avatar::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(135deg, rgba(35,39,31,0.10) 0 2px, transparent 2px 16px);
+  }
+
+  .av-1{ background:#c2b09c; }
+  .av-2{ background:#9fae95; }
+  .av-3{ background:#b6a893; }
+  .av-4{ background:#a8ab8d; }
+
+  .member-name{ font-family:'Fraunces', serif; font-weight:500; font-size:17px; }
+  .member-role{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--forest);
+    text-transform:uppercase; letter-spacing:0.03em; margin-top:2px; margin-bottom:8px;
+  }
+  .member-desc{ font-size:14px; color:var(--gray); }
+
+  /* ---------- Testimonials ---------- */
+
+  .testimonials{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+  }
+  @media (max-width:900px){ .testimonials{ grid-template-columns:1fr; } }
+
+  .testimonial{
+    border-left:2px solid var(--forest);
+    padding-left:20px;
+  }
+
+  .testimonial p{
+    font-family:'Fraunces', serif; font-style:italic; font-size:17px;
+    line-height:1.5; color:var(--ink); margin-bottom:14px;
+  }
+
+  .testimonial .who{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--gray);
+  }
+
+  /* ---------- Contact ---------- */
+
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  @media (max-width:800px){ .contact-grid{ grid-template-columns:1fr; } }
+
+  .contact-info p{ margin-bottom:10px; color:#3d3b32; }
+
+  .contact-info .label{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; text-transform:uppercase;
+    color:var(--gray); letter-spacing:0.03em; margin-top:22px; margin-bottom:6px;
+  }
+
+  .contact-info .label:first-child{ margin-top:0; }
+
+  form{ display:flex; flex-direction:column; gap:14px; }
+
+  form label{
+    font-family:'JetBrains Mono', monospace; font-size:11px; text-transform:uppercase;
+    color:var(--gray); letter-spacing:0.03em; margin-bottom:5px; display:block;
+  }
+
+  form input, form textarea{
+    width:100%;
+    font-family:'Inter', sans-serif; font-size:14.5px;
+    background:var(--card); border:1px solid var(--line); border-radius:3px;
+    padding:11px 12px;
+  }
+
+  form input:focus-visible, form textarea:focus-visible{
+    outline:2px solid var(--forest); outline-offset:1px;
+  }
+
+  form textarea{ resize:vertical; min-height:100px; }
+
+  form button{
+    align-self:flex-start;
+    background:var(--forest); color:var(--paper); border:none;
+    font-family:'JetBrains Mono', monospace; font-size:13px;
+    padding:12px 24px; border-radius:3px; cursor:pointer;
+    transition:background .15s ease; margin-top:6px;
+  }
+  form button:hover{ background:var(--forest-dim); }
+
+  /* La barre de recherche est aussi un <form> : on rétablit sa mise en page */
+  form.search-bar{ display:grid; gap:16px; }
+  form.search-bar .field label{ margin-bottom:0; }
+  form.search-bar .search-btn{ margin-top:0; align-self:end; background:var(--brick); padding:11px 22px; }
+  form.search-bar .search-btn:hover{ background:#8a3c29; }
+
+  /* ---------- Footer ---------- */
+
+  footer{ padding:44px 0 70px; }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:14px;
+  }
+  footer p{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--gray); }
+  footer a{ border-bottom:1px solid var(--line); }
+  footer a:hover{ color:var(--brick); border-color:var(--brick); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .listing{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="wordmark">Haino&#8202;&amp;&#8202;Cie<span>.</span>Immobilier</div>
+    <div class="nav-links">
+      <a href="#annonces">Annonces</a>
+      <a href="#equipe">Équipe</a>
+      <a href="#temoignages">Avis</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">prendre rendez-vous</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <p class="eyebrow">Agence indépendante — depuis 2011</p>
+      <h1>Vendre, louer, investir — <em>en toute confiance</em></h1>
+      <p class="hero-sub">
+        Haino et Cie Immobilier accompagne particuliers et entreprises dans leurs
+        projets résidentiels et commerciaux, avec une connaissance fine du
+        marché local et un suivi personnalisé du premier contact à la remise
+        des clés.
+      </p>
+    </div>
+
+    <form class="search-bar" id="search-form" aria-label="Recherche de biens">
+      <div class="field">
+        <label for="transaction">Transaction</label>
+        <select id="transaction">
+          <option>Achat</option>
+          <option>Location</option>
+          <option>Local commercial</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ville">Ville / secteur</label>
+        <input id="ville" type="text" placeholder="ex. Lyon 6e">
+      </div>
+      <div class="field">
+        <label for="budget">Budget max</label>
+        <input id="budget" type="text" placeholder="ex. 350 000 €">
+      </div>
+      <button class="search-btn" type="submit">Rechercher</button>
+    </form>
+  </div>
+</header>
+
+<section class="section" id="annonces">
+  <div class="wrap">
+
+    <div id="bloc-recommandations" style="display:none; margin-bottom:56px;">
+      <div class="section-head">
+        <h2>Recommandé pour vous</h2>
+        <span class="tag" id="tag-recommandations">selon votre navigation</span>
+      </div>
+      <div class="listings" id="grille-recommandations"></div>
+    </div>
+
+    <div class="section-head">
+      <h2>Biens à la une</h2>
+      <span class="tag">6 annonces sélectionnées</span>
+    </div>
+
+    <div class="listings">
+
+      <article class="listing">
+        <div class="listing-visual lv-1"><span class="badge">à vendre</span></div>
+        <div class="listing-body">
+          <p class="listing-ref">RÉF. BI-2841</p>
+          <h3 class="listing-title">Maison de maître</h3>
+          <p class="listing-loc">Saint-Rambert, 5 pièces</p>
+          <div class="listing-specs">
+            <span>142 m²</span><span>4 ch.</span><span>jardin</span>
+          </div>
+          <p class="listing-price">485 000 €</p>
+        </div>
+      </article>
+
+      <article class="listing">
+        <div class="listing-visual lv-2"><span class="badge location">à louer</span></div>
+        <div class="listing-body">
+          <p class="listing-ref">RÉF. BI-2839</p>
+          <h3 class="listing-title">Appartement lumineux</h3>
+          <p class="listing-loc">Centre-ville, 3 pièces</p>
+          <div class="listing-specs">
+            <span>68 m²</span><span>2 ch.</span><span>balcon</span>
+          </div>
+          <p class="listing-price">1 150 €/mois</p>
+        </div>
+      </article>
+
+      <article class="listing">
+        <div class="listing-visual lv-3"><span class="badge commercial">local commercial</span></div>
+        <div class="listing-body">
+          <p class="listing-ref">RÉF. BI-2830</p>
+          <h3 class="listing-title">Local rue piétonne</h3>
+          <p class="listing-loc">Hyper-centre, RDC</p>
+          <div class="listing-specs">
+            <span>95 m²</span><span>vitrine</span><span>cave</span>
+          </div>
+          <p class="listing-price">2 400 €/mois</p>
+        </div>
+      </article>
+
+      <article class="listing">
+        <div class="listing-visual lv-4"><span class="badge">à vendre</span></div>
+        <div class="listing-body">
+          <p class="listing-ref">RÉF. BI-2822</p>
+          <h3 class="listing-title">Villa contemporaine</h3>
+          <p class="listing-loc">Les Collines, 6 pièces</p>
+          <div class="listing-specs">
+            <span>210 m²</span><span>5 ch.</span><span>piscine</span>
+          </div>
+          <p class="listing-price">760 000 €</p>
+        </div>
+      </article>
+
+      <article class="listing">
+        <div class="listing-visual lv-5"><span class="badge location">à louer</span></div>
+        <div class="listing-body">
+          <p class="listing-ref">RÉF. BI-2818</p>
+          <h3 class="listing-title">Studio rénové</h3>
+          <p class="listing-loc">Quartier des Facultés</p>
+          <div class="listing-specs">
+            <span>28 m²</span><span>meublé</span><span>calme</span>
+          </div>
+          <p class="listing-price">590 €/mois</p>
+        </div>
+      </article>
+
+      <article class="listing">
+        <div class="listing-visual lv-6"><span class="badge">à vendre</span></div>
+        <div class="listing-body">
+          <p class="listing-ref">RÉF. BI-2805</p>
+          <h3 class="listing-title">Longère rénovée</h3>
+          <p class="listing-loc">Vallée-Verte, 7 pièces</p>
+          <div class="listing-specs">
+            <span>185 m²</span><span>4 ch.</span><span>terrain 2000 m²</span>
+          </div>
+          <p class="listing-price">395 000 €</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="equipe">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>L'équipe</h2>
+      <span class="tag">4 conseillers</span>
+    </div>
+
+    <div class="team">
+      <div class="member">
+        <div class="avatar av-1"></div>
+        <p class="member-name">Claire Haino</p>
+        <p class="member-role">Fondatrice</p>
+        <p class="member-desc">18 ans d'expérience en transaction résidentielle.</p>
+      </div>
+      <div class="member">
+        <div class="avatar av-2"></div>
+        <p class="member-name">Marc Ferrand</p>
+        <p class="member-role">Conseiller senior</p>
+        <p class="member-desc">Spécialiste des biens de caractère et villas.</p>
+      </div>
+      <div class="member">
+        <div class="avatar av-3"></div>
+        <p class="member-name">Nadia Kessler</p>
+        <p class="member-role">Gestion locative</p>
+        <p class="member-desc">Suivi des locataires et propriétaires bailleurs.</p>
+      </div>
+      <div class="member">
+        <div class="avatar av-4"></div>
+        <p class="member-name">Julien Aubry</p>
+        <p class="member-role">Immobilier commercial</p>
+        <p class="member-desc">Locaux, bureaux et implantations commerciales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="temoignages">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Ce qu'on dit de nous</h2>
+      <span class="tag">avis clients</span>
+    </div>
+
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>Un accompagnement sérieux du début à la fin, avec une vraie écoute de nos contraintes.</p>
+        <p class="who">— Famille Renoux, achat à Saint-Rambert</p>
+      </div>
+      <div class="testimonial">
+        <p>La mise en location de notre appartement a été gérée sans aucun souci en trois semaines.</p>
+        <p class="who">— T. Lemoine, propriétaire bailleur</p>
+      </div>
+      <div class="testimonial">
+        <p>Une équipe qui connaît vraiment le secteur commercial local, précieux pour notre implantation.</p>
+        <p class="who">— Atelier Nord, local commercial</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Nous contacter</h2>
+      <span class="tag">réponse sous 24h</span>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="label">Adresse</p>
+        <p>12 rue des Tanneurs, 69001 Lyon</p>
+
+        <p class="label">Téléphone</p>
+        <p>04 78 00 00 00</p>
+
+        <p class="label">Email</p>
+        <p>contact@haino-immobilier.fr</p>
+
+        <p class="label">Horaires</p>
+        <p>Lun–Ven, 9h–19h · Sam, 9h–13h</p>
+      </div>
+
+      <form id="contact-form">
+        <div>
+          <label for="nom">Nom</label>
+          <input id="nom" type="text" placeholder="Votre nom">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="vous@exemple.fr">
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Décrivez votre projet..."></textarea>
+        </div>
+        <button type="submit">Envoyer le message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Haino et Cie Immobilier — carte professionnelle n° XXXX, délivrée par la CCI</p>
+    <a href="#annonces">↑ voir les annonces</a>
+  </div>
+</footer>
+
+<script>
+  // ==================================================================
+  // Connexion à l'API Haino et Cie Immobilier
+  // En local (uvicorn lancé sur ta machine), l'API répond sur ce port.
+  // En production, remplace cette URL par celle de ton API déployée
+  // (ex. "https://api.haino-immobilier.fr").
+  // ==================================================================
+  const API_URL = "http://127.0.0.1:8000";
+
+  const grille = document.querySelector("#annonces .listings:not(#grille-recommandations)");
+  const grilleRecommandations = document.getElementById("grille-recommandations");
+  const blocRecommandations = document.getElementById("bloc-recommandations");
+
+  // ------------------------------------------------------------------
+  // Sécurité : échapper tout texte issu de la base de données avant de
+  // l'insérer dans le HTML, pour empêcher l'injection de script (XSS).
+  // Voir dossier de conception, section 8.3.
+  // ------------------------------------------------------------------
+  function echapper(texte){
+    const div = document.createElement("div");
+    div.textContent = String(texte ?? "");
+    return div.innerHTML;
+  }
+
+  // ------------------------------------------------------------------
+  // Identifiant de session anonyme, pour le suivi des interactions et
+  // les recommandations personnalisées. Voir conception, section 5.3.
+  // Aucune donnée personnelle n'est stockée ici, juste un identifiant
+  // aléatoire propre à ce navigateur.
+  // ------------------------------------------------------------------
+  function obtenirSessionId(){
+    let id = localStorage.getItem("haino_session_id");
+    if (!id){
+      id = "sess-" + crypto.randomUUID();
+      localStorage.setItem("haino_session_id", id);
+    }
+    return id;
+  }
+  const sessionId = obtenirSessionId();
+
+  function enregistrerInteraction(annonceId, type){
+    fetch(`${API_URL}/interactions`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ utilisateur_session_id: sessionId, annonce_id: annonceId, type }),
+    }).catch(() => { /* silencieux : le suivi ne doit jamais bloquer la navigation */ });
+  }
+
+  function badgeInfo(type){
+    if (type === "location") return { classe: "location", texte: "à louer" };
+    if (type === "commercial") return { classe: "commercial", texte: "local commercial" };
+    return { classe: "", texte: "à vendre" };
+  }
+
+  function formaterPrix(annonce){
+    const prix = annonce.prix.toLocaleString("fr-FR");
+    return annonce.type_transaction === "location" ? `${prix} €/mois` : `${prix} €`;
+  }
+
+  function carteAnnonce(annonce){
+    const badge = badgeInfo(annonce.type_transaction);
+    const visuel = `lv-${(annonce.id % 6) + 1}`;
+    // Tout champ texte venant de l'API passe par echapper() avant insertion.
+    return `
+      <article class="listing" data-annonce-id="${annonce.id}">
+        <div class="listing-visual ${visuel}">
+          <span class="badge ${badge.classe}">${echapper(badge.texte)}</span>
+        </div>
+        <div class="listing-body">
+          <p class="listing-ref">RÉF. ${echapper(annonce.reference)}</p>
+          <h3 class="listing-title">${echapper(annonce.titre)}</h3>
+          <p class="listing-loc">${echapper(annonce.ville)}</p>
+          <div class="listing-specs">
+            <span>${echapper(annonce.surface_m2)} m²</span>
+            <span>${echapper(annonce.chambres)} ch.</span>
+          </div>
+          <p class="listing-price">${formaterPrix(annonce)}</p>
+        </div>
+      </article>
+    `;
+  }
+
+  // Enregistre une "vue" quand le visiteur clique sur une carte d'annonce.
+  function activerSuiviDesVues(conteneur){
+    conteneur.querySelectorAll(".listing[data-annonce-id]").forEach(carte => {
+      carte.style.cursor = "pointer";
+      carte.addEventListener("click", () => {
+        enregistrerInteraction(Number(carte.dataset.annonceId), "vue");
+      });
+    });
+  }
+
+  function afficherAnnonces(annonces){
+    if (annonces.length === 0){
+      grille.innerHTML = `<p style="grid-column:1/-1; font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--gray);">Aucun bien ne correspond à cette recherche.</p>`;
+      return;
+    }
+    grille.innerHTML = annonces.map(carteAnnonce).join("");
+    activerSuiviDesVues(grille);
+  }
+
+  // Au chargement de la page : on tente de charger les vraies annonces
+  // depuis l'API. Si l'API n'est pas lancée, on garde simplement les
+  // annonces d'exemple déjà présentes dans la page (aucune erreur visible).
+  async function chargerAnnonces(params = ""){
+    try{
+      const res = await fetch(`${API_URL}/annonces${params}`);
+      if (!res.ok) throw new Error("Réponse API invalide");
+      const annonces = await res.json();
+      if (annonces.length > 0 || params) afficherAnnonces(annonces);
+    }catch(err){
+      console.warn("API indisponible, affichage des annonces d'exemple.", err);
+    }
+  }
+
+  // Charge le bloc "Recommandé pour vous". Reste masqué si l'API ne
+  // répond pas ou si elle ne renvoie aucun résultat.
+  async function chargerRecommandations(){
+    try{
+      const res = await fetch(`${API_URL}/recommandations/${sessionId}?n=3`);
+      if (!res.ok) throw new Error("Réponse API invalide");
+      const recommandations = await res.json();
+      if (recommandations.length === 0) return;
+
+      const personnalisees = recommandations.some(a => a.score > 0);
+      document.getElementById("tag-recommandations").textContent =
+        personnalisees ? "selon votre navigation" : "nos dernières annonces";
+
+      grilleRecommandations.innerHTML = recommandations.map(carteAnnonce).join("");
+      activerSuiviDesVues(grilleRecommandations);
+      blocRecommandations.style.display = "block";
+    }catch(err){
+      console.warn("Recommandations indisponibles.", err);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    chargerAnnonces();
+    chargerRecommandations();
+  });
+
+  // Barre de recherche : interroge l'API avec les filtres choisis
+  const mapTransaction = { "Achat": "vente", "Location": "location", "Local commercial": "commercial" };
+
+  document.getElementById("search-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    const transaction = mapTransaction[document.getElementById("transaction").value];
+    const ville = document.getElementById("ville").value.trim();
+    const budget = document.getElementById("budget").value.replace(/[^\d]/g, "");
+
+    const params = new URLSearchParams();
+    if (ville) params.set("ville", ville);
+    if (transaction) params.set("type_transaction", transaction);
+    if (budget) params.set("prix_max", budget);
+
+    chargerAnnonces(`?${params.toString()}`);
+    document.getElementById("annonces").scrollIntoView({ behavior: "smooth" });
+  });
+
+  // Formulaire de contact : envoie le message à l'API
+  document.getElementById("contact-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    const bouton = this.querySelector("button");
+    const texteInitial = bouton.textContent;
+    bouton.textContent = "Envoi en cours...";
+    bouton.disabled = true;
+
+    const donnees = {
+      nom: document.getElementById("nom").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+    };
+
+    try{
+      const res = await fetch(`${API_URL}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(donnees),
+      });
+      if (!res.ok) throw new Error("Échec de l'envoi");
+      bouton.textContent = "Message envoyé ✓";
+      this.reset();
+    }catch(err){
+      bouton.textContent = "Erreur — réessayez";
+      console.error(err);
+    }finally{
+      setTimeout(() => { bouton.textContent = texteInitial; bouton.disabled = false; }, 3000);
+    }
+  });
+</script>
+</body>
+</html>
